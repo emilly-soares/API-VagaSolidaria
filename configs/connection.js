@@ -13,9 +13,9 @@ const sequelize = new Sequelize(config.development.url, {
 
 try {
   sequelize.authenticate();
-  console.log('Conected Sequelize');
+  console.log('Connect Sequelize');
 } catch (error) {
-  console.error('Error Conected', error);
+  console.error('Error Connect', error);
 }
 
 module.exports = { Sequelize, sequelize };
