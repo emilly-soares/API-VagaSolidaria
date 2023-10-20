@@ -12,7 +12,7 @@ app.listen(port, () => {
   console.log(`Run server...${port}`);
 });
 
-app.get("/", async (req, res) => {
+app.get("/users", async (req, res) => {
   try {
     const users = await User.findAll();
     res.json(users);
@@ -21,7 +21,7 @@ app.get("/", async (req, res) => {
   }
 });
 
-app.post("/", async (req, res) => {
+app.post("/users", async (req, res) => {
   try {
     const { email, password } = req.body;
     await User.create({
