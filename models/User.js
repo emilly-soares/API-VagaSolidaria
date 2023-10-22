@@ -1,6 +1,6 @@
 const database = require("../configs/connection");
 
-const User = database.sequelize.define("users", {
+const User = database.sequelize.define("tb_users", {
   id: {
     type: database.Sequelize.INTEGER,
     autoIncrement: true,
@@ -16,6 +16,10 @@ const User = database.sequelize.define("users", {
     type: database.Sequelize.STRING,
     allowNull: false,
   },
+  isAdmin: {
+    type: database.Sequelize.BOOLEAN,
+    allowNull: false,
+  }
 });
 
 User.sync();
