@@ -2,7 +2,6 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 
 class UserController {
-
   static async createUser(req, res) {
     try {
       const { email, password, isAdmin } = req.body;
@@ -24,27 +23,12 @@ class UserController {
   static async listUsers(req, res) {
     try {
       const users = await User.findAll({
-        attributes: { exclude: ['password'] }
+        attributes: { exclude: ["password"] },
       });
       return res.status(200).json(users);
     } catch (error) {
       console.error("Erro ao listar usuários:", error);
       res.status(500).json({ error: "Erro ao listar usuários" });
-    }
-  }
-
-  static async deleteUser(req, res) {
-    const id = req.params.id;
-    try {
-      await User.destroy({
-        where: {
-          id: id,
-        },
-      });
-      return res.status(200).json({ message: "Usuário excluído com sucesso" });
-    } catch (error) {
-      console.error("Erro ao excluir usuário:", error);
-      res.status(500).json({ error: "Erro ao excluir usuário" });
     }
   }
 
@@ -66,6 +50,21 @@ class UserController {
     } catch (error) {
       console.error("Erro ao atualizar usuário:", error);
       res.status(500).json({ error: "Erro ao atualizar usuário" });
+    }
+  }
+
+  static async deleteUser(req, res) {
+    const id = req.params.id;
+    try {
+      await User.destroy({
+        where: {
+          id: id,
+        },
+      });
+      return res.status(200).json({ message: "Usuário excluído com sucesso" });
+    } catch (error) {
+      console.error("Erro ao excluir usuário:", error);
+      res.status(500).json({ error: "Erro ao excluir usuário" });
     }
   }
 }

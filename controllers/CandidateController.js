@@ -40,23 +40,6 @@ class CandidateController {
     }
   }
 
-  static async deleteCandidate(req, res) {
-    const userId = req.params.userId;
-    try {
-      await Candidate.destroy({
-        where: {
-          userId: userId,
-        },
-      });
-      return res
-        .status(200)
-        .json({ message: "Candidato excluído com sucesso" });
-    } catch (error) {
-      console.error("Erro ao excluir candidato:", error);
-      res.status(500).json({ error: "Erro ao excluir candidato" });
-    }
-  }
-
   static async updateCandidate(req, res) {
     const userId = req.params.userId;
     const updatedCandidateData = req.body;
@@ -82,6 +65,23 @@ class CandidateController {
     } catch (error) {
       console.error("Erro ao atualizar candidato:", error);
       res.status(500).json({ error: "Erro ao atualizar candidato" });
+    }
+  }
+
+  static async deleteCandidate(req, res) {
+    const userId = req.params.userId;
+    try {
+      await Candidate.destroy({
+        where: {
+          userId: userId,
+        },
+      });
+      return res
+        .status(200)
+        .json({ message: "Candidato excluído com sucesso" });
+    } catch (error) {
+      console.error("Erro ao excluir candidato:", error);
+      res.status(500).json({ error: "Erro ao excluir candidato" });
     }
   }
 }
