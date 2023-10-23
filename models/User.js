@@ -1,3 +1,4 @@
+const { DataTypes } = require("sequelize");
 const database = require("../configs/connection");
 
 const User = database.sequelize.define("tb_users", {
@@ -18,7 +19,7 @@ const User = database.sequelize.define("tb_users", {
   },
   isAdmin: {
     type: database.Sequelize.BOOLEAN,
-    allowNull: false,
+    defaultValue: false,
   }
 });
 

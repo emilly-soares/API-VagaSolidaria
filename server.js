@@ -1,7 +1,9 @@
 require("./configs/connection");
-const User = require("./models/User");
+
+const UserController = require("./controllers/UserController");
 const express = require("express");
 const cors = require("cors");
+const Candidate = require("./models/Candidate");
 require("dotenv").config();
 
 const app = express();
@@ -12,21 +14,33 @@ app.listen(port, () => {
   console.log(`Run server...${port}`);
 });
 
-app.get("/users", async (req, res) => {
+app.get("/users", UserController.listUsers);
+
+app.post("/user", UserController.createUser);
+
+app.delete("/user/:id", UserController.deleteUser);
+
+app.get("/candidates", async (req, res) => {
   try {
-    const users = await User.findAll();
-    res.json(users);
+    const candidates = await Candidate.findAll();
+    res.json(candidates);
   } catch (err) {
     res.status(404).send(err);
   }
 });
 
-app.post("/users", async (req, res) => {
+app.post("/candidate", async (req, res) => {
   try {
-    const { email, password } = req.body;
-    await User.create({
-      email: email,
-      password: password,
+    const { name, dateBirth, CPF, street, numberStreet, neighborhood, userId } =
+      req.body;
+    await Candidate.create({
+      name: name,
+      dateBirth: dateBirth,
+      CPF: CPF,
+      street: street,
+      numberStreet: numberStreet,
+      neighborhood: neighborhood,
+      userId: parseInt(userId),
     }).then(() => res.status(200).json("success"));
   } catch (err) {
     res.status(404).send(err);
