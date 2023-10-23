@@ -62,7 +62,7 @@ class CandidateController {
     const updatedCandidateData = req.body;
 
     try {
-      const candidate = await Candidate.findByPk(userId);
+      const candidate = await Candidate.findOne({ where: { userId } });
 
       if (!candidate) {
         return res.status(404).json({ error: "Candidato não encontrado" });
@@ -71,7 +71,6 @@ class CandidateController {
       await candidate.update({
         name: updatedCandidateData.name,
         dateBirth: updatedCandidateData.dateBirth,
-        CPF: updatedCandidateData.CPF,
         street: updatedCandidateData.street,
         numberStreet: updatedCandidateData.numberStreet,
         neighborhood: updatedCandidateData.neighborhood,
