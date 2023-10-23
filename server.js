@@ -1,6 +1,5 @@
 require("./configs/connection");
-
-const UserController = require("./controllers/UserController");
+const routes = require("./routes/userRoutes");
 const express = require("express");
 const cors = require("cors");
 const Candidate = require("./models/Candidate");
@@ -9,16 +8,11 @@ require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 3333;
 
-app.use(express.json(), cors());
+app.use(express.json(), cors(), routes);
 app.listen(port, () => {
   console.log(`Run server...${port}`);
 });
 
-app.get("/users", UserController.listUsers);
-
-app.post("/user", UserController.createUser);
-
-app.delete("/user/:id", UserController.deleteUser);
 
 app.get("/candidates", async (req, res) => {
   try {
