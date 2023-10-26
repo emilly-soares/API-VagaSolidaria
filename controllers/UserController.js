@@ -1,6 +1,6 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
-
+const jwt = require('jsonwebtoken');
 class UserController {
   static async createUser(req, res) {
     try {
@@ -65,6 +65,33 @@ class UserController {
     } catch (error) {
       console.error("Erro ao excluir usuário:", error);
       res.status(500).json({ error: "Erro ao excluir usuário" });
+    }
+  }
+
+  static async authenticate(req, res) {
+    const { email, password } = req.body;
+    try {
+      const isAuthenticated = await User.findOne({
+        where: { email },
+      });
+
+      const passwordHash = await bcrypt.compare(password, isAuthenticated.password);
+
+      if (passwordHash) {
+        const token = jwt.sign({ id: email }, process.env.SECRET_KEY, {
+          expiresIn: 86400,
+        });
+
+        res.json({
+          name: isAuthenticated.name,
+          email: isAuthenticated.email,
+          token: token,
+        });
+      }
+      return res.status(401).json({ message: "Usuário não encontrado " });
+    } catch (error) {
+      console.error(`Error: ${error}`);
+      res.status(500).json({ message: "Ocorreu um erro na autenticação" });
     }
   }
 }
