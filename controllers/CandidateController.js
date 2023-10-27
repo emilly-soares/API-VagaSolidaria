@@ -13,20 +13,20 @@ class CandidateController {
         userId,
       } = req.body;
 
-      await Candidate.create({
-        name: name,
-        dateBirth: dateBirth,
-        CPF: CPF,
-        street: street,
-        numberStreet: numberStreet,
-        neighborhood: neighborhood,
+      const candidate = await Candidate.create({
+        name,
+        dateBirth,
+        CPF,
+        street,
+        numberStreet,
+        neighborhood,
         userId: parseInt(userId),
       });
 
-      return res.status(201).json({ message: "Candidato criado com sucesso" });
+      return res.status(201).json({ message: "Candidato criado com sucesso", candidate });
     } catch (error) {
       console.error("Erro ao criar candidato:", error);
-      res.status(500).json({ error: "Erro ao criar candidato" });
+      return res.status(500).json({ error: "Erro ao criar candidato" });
     }
   }
 
@@ -36,7 +36,7 @@ class CandidateController {
       return res.status(200).json(candidates);
     } catch (error) {
       console.error("Erro ao listar candidatos:", error);
-      res.status(500).json({ error: "Erro ao listar candidatos" });
+      return res.status(500).json({ error: "Erro ao listar candidatos" });
     }
   }
 
@@ -51,37 +51,32 @@ class CandidateController {
         return res.status(404).json({ error: "Candidato não encontrado" });
       }
 
-      await candidate.update({
-        name: updatedCandidateData.name,
-        dateBirth: updatedCandidateData.dateBirth,
-        street: updatedCandidateData.street,
-        numberStreet: updatedCandidateData.numberStreet,
-        neighborhood: updatedCandidateData.neighborhood,
-      });
+      await candidate.update(updatedCandidateData);
 
-      return res
-        .status(200)
-        .json({ message: "Candidato atualizado com sucesso" });
+      return res.status(200).json({ message: "Candidato atualizado com sucesso", candidate });
     } catch (error) {
       console.error("Erro ao atualizar candidato:", error);
-      res.status(500).json({ error: "Erro ao atualizar candidato" });
+      return res.status(500).json({ error: "Erro ao atualizar candidato" });
     }
   }
 
   static async deleteCandidate(req, res) {
     const userId = req.params.userId;
     try {
-      await Candidate.destroy({
+      const deletedRows = await Candidate.destroy({
         where: {
-          userId: userId,
+          userId,
         },
       });
-      return res
-        .status(200)
-        .json({ message: "Candidato excluído com sucesso" });
+
+      if (deletedRows === 0) {
+        return res.status(404).json({ error: "Candidato não encontrado" });
+      }
+
+      return res.status(200).json({ message: "Candidato excluído com sucesso" });
     } catch (error) {
       console.error("Erro ao excluir candidato:", error);
-      res.status(500).json({ error: "Erro ao excluir candidato" });
+      return res.status(500).json({ error: "Erro ao excluir candidato" });
     }
   }
 }
