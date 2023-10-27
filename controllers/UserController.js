@@ -82,13 +82,14 @@ class UserController {
           expiresIn: 86400,
         });
 
-        res.json({
+        return res.json({
           name: isAuthenticated.name,
           email: isAuthenticated.email,
           token: token,
         });
+      } else {
+        return res.status(401).json({ message: "Usuário não encontrado" });
       }
-      return res.status(401).json({ message: "Usuário não encontrado " });
     } catch (error) {
       console.error(`Error: ${error}`);
       res.status(500).json({ message: "Ocorreu um erro na autenticação" });
