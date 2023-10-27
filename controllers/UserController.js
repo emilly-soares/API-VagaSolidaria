@@ -2,6 +2,7 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require('jsonwebtoken');
 class UserController {
+
   static async createUser(req, res) {
     try {
       const { email, password, isAdmin } = req.body;
@@ -20,6 +21,7 @@ class UserController {
     }
   }
 
+
   static async listUsers(req, res) {
     try {
       const users = await User.findAll({
@@ -31,6 +33,7 @@ class UserController {
       res.status(500).json({ error: "Erro ao listar usuários" });
     }
   }
+
 
   static async updateUser(req, res) {
     const id = req.params.id;
@@ -53,6 +56,7 @@ class UserController {
     }
   }
 
+
   static async deleteUser(req, res) {
     const id = req.params.id;
     try {
@@ -67,6 +71,7 @@ class UserController {
       res.status(500).json({ error: "Erro ao excluir usuário" });
     }
   }
+
 
   static async authenticate(req, res) {
     const { email, password } = req.body;
@@ -95,6 +100,7 @@ class UserController {
       res.status(500).json({ message: "Ocorreu um erro na autenticação" });
     }
   }
+
 }
 
 module.exports = UserController;
