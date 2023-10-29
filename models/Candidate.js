@@ -24,6 +24,12 @@ const Candidate = database.sequelize.define("tb_candidates", {
     unique: true,
   },
 
+  phone: {
+    type: database.Sequelize.STRING,
+    allowNull: false,
+    unique: true,
+  },
+
   street: {
     type: database.Sequelize.STRING,
     allowNull: false,
