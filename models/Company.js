@@ -15,6 +15,12 @@ const Company = database.sequelize.define("tb_company", {
         unique: true,
     },
 
+    phone: {
+        type: database.Sequelize.STRING,
+        allowNull: false,
+        unique: true,
+      },
+
     ie: {
         type: database.Sequelize.STRING,
         allowNull: false,
@@ -29,8 +35,7 @@ const Company = database.sequelize.define("tb_company", {
 
     fantasyName: {
         type: database.Sequelize.STRING,
-        allowNull: false,
-        unique: true,
+        allowNull: false
     },
 
 
@@ -47,7 +52,13 @@ const Company = database.sequelize.define("tb_company", {
     neighborhood: {
         type: database.Sequelize.STRING,
         allowNull: false,
-    }
+    },
+
+    
+  candidateId: {
+    type: database.Sequelize.INTEGER,
+    allowNull: false,
+  },
 
 });
 
