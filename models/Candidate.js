@@ -1,6 +1,7 @@
 const database = require("../configs/connection");
 
 const Candidate = database.sequelize.define("tb_candidates", {
+  
   id: {
     type: database.Sequelize.INTEGER,
     autoIncrement: true,

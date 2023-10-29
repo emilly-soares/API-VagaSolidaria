@@ -1,6 +1,6 @@
 const database = require("../configs/connection");
 
-const Company = database.sequelize.define("tb_company", {
+const Company = database.sequelize.define("tb_companies", {
 
     id: {
         type: database.Sequelize.INTEGER,
@@ -62,4 +62,5 @@ const Company = database.sequelize.define("tb_company", {
 
 });
 
+Company.sync();
 module.exports = Company;

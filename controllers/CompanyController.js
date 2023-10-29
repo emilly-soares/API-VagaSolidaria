@@ -5,22 +5,26 @@ class CompanyController {
         try {
             const {
                 cnpj,
+                phone,
                 ie,
                 corporateReason,
                 fantasyName,
                 street,
                 numberStreet,
                 neighborhood,
+                candidateId
             } = req.body;
 
             await Company.create({
                 cnpj,
+                phone,
                 ie,
                 corporateReason,
                 fantasyName,
                 street,
                 numberStreet,
                 neighborhood,
+                candidateId:parseInt(candidateId), 
             });
 
             return res.status(201).json({ message: "Empresa criada com sucesso" });
