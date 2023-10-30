@@ -3,6 +3,7 @@ const routes = express.Router();
 const CandidateController = require("../controllers/CandidateController");
 const UserController = require("../controllers/UserController");
 const CompanyController = require("../controllers/CompanyController");
+const VacancyController = require("../controllers/VacancyController");
 const isAuthenticated = require("../middleware/authenticate");
 
 routes.post("/userAuthentication", UserController.authenticate);
@@ -24,5 +25,9 @@ routes.get("/companies", CompanyController.listCompanies);
 routes.put("/company/:companyId", CompanyController.updateCompany);
 routes.delete("/company/:companyId", CompanyController.deleteCompany);
 
+routes.post("/vacancy", VacancyController.createVacancy);
+routes.get("/vacancies", VacancyController.listVacancies);
+routes.put("/vacancy/:vacancyId", VacancyController.updateVacancy);
+routes.delete("/vacancy/:vacancyId", VacancyController.deleteVacancy);
 
 module.exports = routes;
