@@ -4,6 +4,7 @@ const CandidateController = require("../controllers/CandidateController");
 const UserController = require("../controllers/UserController");
 const CompanyController = require("../controllers/CompanyController");
 const VacancyController = require("../controllers/VacancyController");
+const CandidateVacancyController = require("../controllers/CandidateVacancyController");
 const isAuthenticated = require("../middleware/authenticate");
 
 routes.post("/userAuthentication", UserController.authenticate);
@@ -29,5 +30,10 @@ routes.post("/vacancy", VacancyController.createVacancy);
 routes.get("/vacancies", VacancyController.listVacancies);
 routes.put("/vacancy/:vacancyId", VacancyController.updateVacancy);
 routes.delete("/vacancy/:vacancyId", VacancyController.deleteVacancy);
+
+routes.post("/candidateVacancy", CandidateVacancyController.createCandidateVacancy);
+routes.get("/candidatesVacancies", CandidateVacancyController.listCandidateVacancies);
+routes.put("/candidateVacancy/candidateVacancyId", CandidateVacancyController.updateCandidateVacancy);
+routes.delete("/candidateVacancy/candidateVacancyId", CandidateVacancyController.deleteCandidateVacancy);
 
 module.exports = routes;
