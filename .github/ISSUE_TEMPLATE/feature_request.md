@@ -1,20 +1,15 @@
----
-name: Feature request
-about: Suggest an idea for this project
-title: ''
-labels: ''
-assignees: ''
+## Descrição da Nova Funcionalidade
 
----
+- **Descrição**: [Descreva a funcionalidade de forma sucinta]
+- **Motivação**: [Explique por que essa funcionalidade é necessária]
+- **Exemplo de Caso de Uso**: [Forneça um exemplo de como essa funcionalidade será usada]
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+- **Benefícios**: [Descreva os benefícios ou valor que essa funcionalidade trará]
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+- **Critérios de Aceitação**:
+   - [Detalhe os critérios que indicarão que a funcionalidade está concluída]
+   - [Exemplo: "O usuário pode realizar a ação X sem erros"]
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+- **Design e Fluxo de Trabalho**: [Se aplicável, forneça informações sobre o design visual e o fluxo de trabalho da funcionalidade]
 
-**Additional context**
-Add any other context or screenshots about the feature request here.
+- **Documentação Adicional**: [Se houver documentos, wireframes ou referências adicionais, inclua-as aqui]
