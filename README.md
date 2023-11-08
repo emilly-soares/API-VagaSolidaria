@@ -1,7 +1,10 @@
-# 🌟 VagaSolidária
+## 🌟 VagaSolidária
 
 ![Logo](https://github.com/emilly-soares/API-VagaSolidaria/assets/54116441/6f94f003-bdca-458e-830a-bfb441cac93d)
 
+<h4 align="center"> 
+	🚧 🚀 Em construção ...  🚧
+</h4>
 
 ## Descrição
 
@@ -11,20 +14,17 @@ O **VagaSolidária** é uma aplicação em construção que tem como objetivo fa
 
 ## Tecnologias Utilizadas
 
-- :rocket Node.js
-- :bar_chart PostgreSQL
-- :link Sequelize (ORM)
-- :computer Express
-
+- 🚀 Node.js
+- 📈 PostgreSQL
+- 🔗 Sequelize (ORM)
+- 💻 Express
 
 Contribuições 🤝
 Contribuições são bem-vindas! Sinta-se à vontade para abrir uma issue ou enviar um pull request com melhorias ou correções.
 
+
 Autor 📝
 Feito por Emilly Soares 👋🏽 Entre em contato!🚀
 
-1. Clone o repositório:
-   ```sh
-   git clone https://github.com/seu-usuario/VagaSolidaria.git
 
    
