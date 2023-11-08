@@ -14,7 +14,8 @@
     "sequelize-cli": "^6.6.1"
   },
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "test": "echo 'No tests configured'"
   },
   "name": "api-vagasolidaria",
   "version": "1.0.0",
