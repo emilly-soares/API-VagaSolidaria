@@ -64,11 +64,7 @@ Lembre-se de configurar corretamente as variáveis de ambiente, como as credenci
 
 ## Contribuição
 
-Contribuições são bem-vindas! Sinta-se à vontade para abrir uma issue ou enviar um pull request com melhorias ou correções.
-
-## Licença
-
-Informações sobre a licença do projeto.
+🤝 Contribuições são bem-vindas! Sinta-se à vontade para abrir uma issue ou enviar um pull request com melhorias ou correções.
 
 ### Autor
 📝 Feito por Emilly Soares 👋🏽
