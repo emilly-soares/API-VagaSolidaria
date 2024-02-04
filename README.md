@@ -5,29 +5,51 @@
 ## 🚧 🚀 Em construção ... 🚧
 
 ### Descrição
-O VagaSolidária é uma aplicação em construção que tem como objetivo facilitar a divulgação de vagas para trabalho voluntário na cidade de Nova Andradina - MS. Esta plataforma visa conectar organizações e instituições que precisam de voluntários com pessoas dispostas a ajudar e contribuir para a comunidade.
+O VagaSolidária é uma aplicação em construção que tem como objetivo facilitar a divulgação de vagas para trabalho voluntário na cidade de Nova Andradina - MS. 
+Esta plataforma visa conectar organizações e instituições que precisam de voluntários com pessoas dispostas a ajudar e contribuir para a comunidade.
 
 ⚠️ Atenção: Este projeto ainda está em desenvolvimento e pode não estar pronto para uso.
 
 ## Índice
 
 - [Instalação](#instalação)
-- [Uso](#uso)
-- [Documentação](#documentação)
 - [Contribuição](#contribuição)
 - [Licença](#licença)
 
 ## Instalação
 
-Instruções de instalação e configuração.
+Para instalar e executar o projeto, siga estas etapas:
 
-## Uso
+1. Certifique-se de ter o Node.js instalado em sua máquina. Você pode baixá-lo e instalá-lo a partir do [site oficial do Node.js](https://nodejs.org/).
 
-Exemplos de uso e capturas de tela.
+2. Clone este repositório em sua máquina local:
 
-## Documentação
+    ```bash
+    git clone https://github.com/emilly-soares/API-VagaSolidaria.git
+    ```
 
-Documentação detalhada sobre funcionalidades e APIs.
+3. Navegue até o diretório do projeto:
+
+    ```bash
+    cd API-VagaSolidaria
+    ```
+
+4. Instale as dependências do projeto usando o npm. No terminal, execute o seguinte comando:
+
+    ```bash
+    npm install
+    ```
+
+5. Após a conclusão da instalação das dependências, você pode iniciar o servidor localmente. Use o seguinte comando:
+
+    ```bash
+    npm start
+    ```
+
+6. O servidor será iniciado e estará disponível em `http://localhost:3003`. Você pode acessar este endereço no seu navegador para interagir com a API.
+
+Lembre-se de configurar corretamente as variáveis de ambiente, como as credenciais do banco de dados, antes de iniciar o servidor em ambiente de produção.
+
 
 ### Tecnologias Utilizadas
 - 🚀 **Node.js**
