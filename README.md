@@ -56,10 +56,8 @@ Lembre-se de configurar corretamente as variáveis de ambiente, como as credenci
 - 📈 **PostgreSQL**
 - 🔗 **Sequelize (ORM)**
 - 💻 **Express**
-- 🌐 **React**
 - 📦 **Axios**
 - 🌐 **React Router Dom**
-- 💼 **TypeScript**
 - 📊 **Web Vitals**
 
 ## Contribuição
