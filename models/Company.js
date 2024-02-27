@@ -1,4 +1,4 @@
-const database = require("../configs/connection");
+const database = require("../config/connection");
 
 const Company = database.sequelize.define("tb_companies", {
 

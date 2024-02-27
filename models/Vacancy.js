@@ -1,4 +1,4 @@
-const database = require("../configs/connection");
+const database = require("../config/connection");
 
 const Vacancy = database.sequelize.define("tb_vacancies", {
 
@@ -10,8 +10,8 @@ const Vacancy = database.sequelize.define("tb_vacancies", {
     },
 
     status: {
-        type: database.Sequelize.STRING,
-        allowNull: false,
+        type: database.Sequelize.BOOLEAN,
+        defaultValue: true,
     },
 
     description: {
@@ -32,7 +32,6 @@ const Vacancy = database.sequelize.define("tb_vacancies", {
 
     candidateId: {
         type: database.Sequelize.INTEGER,
-        allowNull: false,
     },
 
 });

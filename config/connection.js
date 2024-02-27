@@ -1,5 +1,5 @@
 const { Sequelize } = require('sequelize');
-const config = require('../configs/config.js');
+const config = require('../config/config.js');
 require('dotenv').config();
 
 const sequelize = new Sequelize(config.development);

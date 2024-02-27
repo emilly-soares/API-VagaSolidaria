@@ -1,4 +1,4 @@
-require("./configs/connection");
+require("./config/connection");
 const routes = require("./routes/routes");
 const express = require("express");
 const cors = require("cors");

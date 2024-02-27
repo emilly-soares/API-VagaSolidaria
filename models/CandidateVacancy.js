@@ -1,4 +1,4 @@
-const database = require("../configs/connection");
+const database = require("../config/connection");
 
 const CandidateVacancy = database.sequelize.define("tb_candidate_vacancy", {
 

@@ -1,5 +1,5 @@
 const { DataTypes } = require("sequelize");
-const database = require("../configs/connection");
+const database = require("../config/connection");
 
 const User = database.sequelize.define("tb_users", {
 
@@ -8,6 +8,11 @@ const User = database.sequelize.define("tb_users", {
     autoIncrement: true,
     allowNull: false,
     primaryKey: true,
+  },
+
+  name: {
+    type: database.Sequelize.STRING,
+    allowNull: false,
   },
 
   email: {

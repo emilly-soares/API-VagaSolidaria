@@ -10,16 +10,13 @@ class AuthenticateUser {
       return res.status(401).json({ error: "Token não fornecido" });
     }
 
-
     const [bearer, token] = authorizationHeader.split(" ");
 
     if (bearer !== "Bearer" || !token) {
       return res.status(401).json({ error: "Token inválido" });
     }
 
-
     const secretResult = dotenv.config();
-
 
     if (secretResult.error) {
       console.error("Erro ao carregar a chave secreta:", secretResult.error);
@@ -31,7 +28,6 @@ class AuthenticateUser {
     if (!secretKey) {
       return res.status(500).json({ error: "Chave secreta não definida" });
     }
-
 
     try {
       const isToken = await jwt.verify(token, secretKey);
@@ -45,7 +41,6 @@ class AuthenticateUser {
       console.error("Erro de autenticação:", error);
       return res.status(401).json({ error: "Erro de autenticação" });
     }
-
   }
 }
 

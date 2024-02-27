@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 const Candidate = require("../models/Candidate");
 
 class CandidateController {
@@ -81,6 +82,41 @@ class CandidateController {
       return res.status(500).json({ error: "Erro ao excluir candidato" });
     }
   }
+
+  static async findCandidate(req, res) {
+    const searchTerm = req.query.searchTerm;
+
+    try {
+      let candidatesByName = [];
+      let candidatesByCPF = [];
+
+      if (searchTerm) {
+        candidatesByName = await Candidate.findAll({
+          where: {
+            name: { [Op.iLike]: `%${searchTerm}%` }, 
+          },
+        });
+
+        candidatesByCPF = await Candidate.findAll({
+          where: {
+            CPF: searchTerm, 
+          },
+        });
+      }
+
+      const result = {
+        candidatesByName,
+        candidatesByCPF,
+      };
+
+      return res.status(200).json(result);
+    } catch (error) {
+      console.error("Erro ao buscar candidato:", error);
+      return res.status(500).json({ error: "Erro ao buscar candidato" });
+    }
+  }
+
+
 }
 
 module.exports = CandidateController;

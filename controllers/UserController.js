@@ -5,10 +5,11 @@ const jwt = require('jsonwebtoken');
 class UserController {
   static async createUser(req, res) {
     try {
-      const { email, password, isAdmin } = req.body;
+      const { name, email, password, isAdmin } = req.body;
       const passwordCipher = await bcrypt.hash(password, 10);
 
       const user = await User.create({
+        name,
         email,
         password: passwordCipher,
         isAdmin,
@@ -35,7 +36,7 @@ class UserController {
 
   static async updateUser(req, res) {
     const id = req.params.id;
-    const { email } = req.body;
+    const { name, email } = req.body;
 
     try {
       let user = await User.findByPk(id);
@@ -45,6 +46,7 @@ class UserController {
       }
 
       user.email = email;
+      user.name = name;
       user = await user.save();
 
       return res.status(200).json(user);

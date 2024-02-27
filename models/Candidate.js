@@ -1,4 +1,4 @@
-const database = require("../configs/connection");
+const database = require("../config/connection");
 
 const Candidate = database.sequelize.define("tb_candidates", {
   
@@ -7,11 +7,6 @@ const Candidate = database.sequelize.define("tb_candidates", {
     autoIncrement: true,
     allowNull: false,
     primaryKey: true,
-  },
-
-  name: {
-    type: database.Sequelize.STRING,
-    allowNull: false,
   },
 
   dateBirth: {
