@@ -9,6 +9,7 @@ const isAuthenticated = require("../middleware/authenticate");
 
 routes.post("/userAuthentication", UserController.authenticate);
 routes.post("/user", UserController.createUser);
+routes.post('/resetPassword', UserController.resetPassword);
 
 routes.use(isAuthenticated.protect);
 

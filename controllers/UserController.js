@@ -2,6 +2,16 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require('jsonwebtoken');
 
+const nodemailer = require('nodemailer');
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'vagasolidaria.na@gmail.com',
+    pass: 'schnpxeitoljoqyf',
+  },
+});
+
 class UserController {
   static async createUser(req, res) {
     try {
@@ -64,7 +74,7 @@ class UserController {
           id,
         },
       });
-      
+
       if (deletedUser === 0) {
         return res.status(404).json({ error: "Usuário não encontrado" });
       }
@@ -75,6 +85,7 @@ class UserController {
       return res.status(500).json({ error: "Erro ao excluir usuário" });
     }
   }
+
 
   static async authenticate(req, res) {
     const { email, password } = req.body;
@@ -105,6 +116,54 @@ class UserController {
     } catch (error) {
       console.error("Erro na autenticação:", error);
       return res.status(500).json({ message: "Ocorreu um erro na autenticação" });
+    }
+  }
+
+
+  static async resetPassword(req, res) {
+    const { email } = req.body;
+
+    try {
+      const user = await User.findOne({ where: { email } });
+
+      if (!user) {
+        return res.status(404).json({ error: 'E-mail não encontrado' });
+      }
+
+      function generateResetToken() {
+        let token = '';
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+        for (let i = 0; i < 6; i++) {
+          token += characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+
+        return token;
+      };
+
+      const resetToken = generateResetToken();
+
+      await user.update({ resetToken });
+
+      const mailOptions = {
+        from: 'vagasolidaria.na@gmail.com',
+        to: email,
+        subject: 'Recuperação de senha',
+        text: `Você solicitou uma recuperação de senha. 
+        Use o token ${resetToken} para redefinir sua senha.`,
+      };
+
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.error('Erro ao enviar e-mail:', error);
+          return res.status(500).json({ error: 'Erro ao enviar e-mail de recuperação de senha' });
+        }
+        console.log('E-mail de recuperação de senha enviado:', info.response);
+        return res.status(200).json({ message: 'E-mail de recuperação de senha enviado com sucesso' });
+      });
+    } catch (error) {
+      console.error('Erro ao processar recuperação de senha:', error);
+      return res.status(500).json({ error: 'Erro ao processar recuperação de senha' });
     }
   }
 }
