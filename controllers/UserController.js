@@ -4,11 +4,14 @@ const jwt = require('jsonwebtoken');
 
 const nodemailer = require('nodemailer');
 
+const gmailUser = process.env.GMAIL_USER;
+const gmailPass = process.env.GMAIL_PASS;
+
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'vagasolidaria.na@gmail.com',
-    pass: 'schnpxeitoljoqyf',
+    user: gmailUser,
+    pass: gmailPass,
   },
 });
 
@@ -154,6 +157,7 @@ class UserController {
       };
 
       transporter.sendMail(mailOptions, (error, info) => {
+
         if (error) {
           console.error('Erro ao enviar e-mail:', error);
           return res.status(500).json({ error: 'Erro ao enviar e-mail de recuperação de senha' });
