@@ -29,6 +29,11 @@ const User = database.sequelize.define("tb_users", {
   isAdmin: {
     type: database.Sequelize.BOOLEAN,
     defaultValue: false,
+  },
+
+  resetToken:{
+    type: database.Sequelize.STRING,
+    unique: true,
   }
 
 });

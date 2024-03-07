@@ -16,6 +16,7 @@ const transporter = nodemailer.createTransport({
 });
 
 class UserController {
+
   static async createUser(req, res) {
     try {
       const { name, email, password, isAdmin } = req.body;
@@ -112,6 +113,7 @@ class UserController {
       });
 
       return res.status(200).json({
+        user: user.id,
         name: user.name,
         email: user.email,
         token,
@@ -133,43 +135,95 @@ class UserController {
         return res.status(404).json({ error: 'E-mail não encontrado' });
       }
 
-      function generateResetToken() {
-        let token = '';
-        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      const resetToken = Math.random().toString(36).substring(2, 8);
 
-        for (let i = 0; i < 6; i++) {
-          token += characters.charAt(Math.floor(Math.random() * characters.length));
-        }
+      user.resetToken = resetToken;
 
-        return token;
-      };
-
-      const resetToken = generateResetToken();
-
-      await user.update({ resetToken });
+      await user.save();
 
       const mailOptions = {
         from: 'vagasolidaria.na@gmail.com',
         to: email,
         subject: 'Recuperação de senha',
-        text: `Você solicitou uma recuperação de senha. 
-        Use o token ${resetToken} para redefinir sua senha.`,
+        text: `Você solicitou uma recuperação de senha. Use o token ${resetToken} para redefinir sua senha.`,
       };
 
       transporter.sendMail(mailOptions, (error, info) => {
-
         if (error) {
           console.error('Erro ao enviar e-mail:', error);
           return res.status(500).json({ error: 'Erro ao enviar e-mail de recuperação de senha' });
         }
         console.log('E-mail de recuperação de senha enviado:', info.response);
-        return res.status(200).json({ message: 'E-mail de recuperação de senha enviado com sucesso' });
+
+        return res.status(200).json({ message: 'E-mail de recuperação de senha enviado com sucesso', resetToken });
       });
     } catch (error) {
       console.error('Erro ao processar recuperação de senha:', error);
       return res.status(500).json({ error: 'Erro ao processar recuperação de senha' });
     }
   }
+
+  static async isAdmin(req, res) {
+    try {
+      const userId = req.params.id;
+      const user = await User.findByPk(userId); 
+
+      if (!user) {
+        return res.status(404).json({ error: 'Usuário não encontrado' });
+      }
+
+      if (user.isAdmin) {
+        return res.json({ isAdmin: true });
+      } else {
+        return res.json({ isAdmin: false });
+      }
+    } catch (error) {
+      console.error('Erro ao verificar se o usuário é administrador:', error);
+      return res.status(500).json({ error: 'Erro interno do servidor' });
+    }
+  }
+
+  static async updatePassword(req, res) {
+    const { email, token, newPassword } = req.body;
+
+    try {
+      const user = await User.findOne({ where: { email } });
+
+      if (!user) {
+        return res.status(404).json({ error: 'E-mail não encontrado' });
+      }
+
+
+      if (user.resetToken !== token) {
+        return res.status(401).json({ error: 'Token inválido' });
+      }
+
+      const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+      await user.update({ password: hashedPassword });
+
+      const mailOptions = {
+        from: 'vagasolidaria.na@gmail.com',
+        to: email,
+        subject: 'Senha alterada com sucesso',
+        text: 'Sua senha foi alterada com sucesso.',
+      };
+
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.error('Erro ao enviar e-mail:', error);
+          return res.status(500).json({ error: 'Erro ao enviar e-mail de confirmação de senha' });
+        }
+        console.log('E-mail de confirmação de senha enviado:', info.response);
+        return res.status(200).json({ message: 'Senha alterada com sucesso' });
+      });
+    } catch (error) {
+      console.error('Erro ao processar recuperação de senha:', error);
+      return res.status(500).json({ error: 'Erro ao processar recuperação de senha' });
+    }
+  }
+
+
 }
 
 module.exports = UserController;

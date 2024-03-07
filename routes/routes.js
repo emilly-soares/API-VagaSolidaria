@@ -5,15 +5,17 @@ const UserController = require("../controllers/UserController");
 const CompanyController = require("../controllers/CompanyController");
 const VacancyController = require("../controllers/VacancyController");
 const CandidateVacancyController = require("../controllers/CandidateVacancyController");
-const isAuthenticated = require("../middleware/authenticate");
+const { protect, isAdmin } = require("../middleware/authenticate");
 
 routes.post("/userAuthentication", UserController.authenticate);
 routes.post("/user", UserController.createUser);
 routes.post('/resetPassword', UserController.resetPassword);
+routes.post('/updatePassword', UserController.updatePassword);
+routes.get('/user/:id/isAdmin', UserController.isAdmin);
 
-routes.use(isAuthenticated.protect);
+routes.use(protect);
 
-routes.post("/useradmin", UserController.createUser);
+routes.post("/userAdmin", UserController.createUser);
 routes.get("/users", UserController.listUsers);
 routes.put("/user/:id", UserController.updateUser);
 routes.delete("/user/:id", UserController.deleteUser);
@@ -24,7 +26,7 @@ routes.put("/candidate/:userId", CandidateController.updateCandidate);
 routes.delete("/candidate/:userId", CandidateController.deleteCandidate);
 routes.get("/candidate/:search", CandidateController.findCandidate);
 
-routes.post("/company", CompanyController.createCompany);
+routes.post("/company", isAdmin, CompanyController.createCompany);
 routes.get("/companies", CompanyController.listCompanies);
 routes.put("/company/:companyId", CompanyController.updateCompany);
 routes.delete("/company/:companyId", CompanyController.deleteCompany);
