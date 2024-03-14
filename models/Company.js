@@ -57,7 +57,7 @@ const Company = database.sequelize.define("tb_companies", {
     
   candidateId: {
     type: database.Sequelize.INTEGER,
-    allowNull: false,
+    allowNull: true,
   },
 
 });

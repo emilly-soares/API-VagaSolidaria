@@ -166,7 +166,7 @@ class UserController {
   static async isAdmin(req, res) {
     try {
       const userId = req.params.id;
-      const user = await User.findByPk(userId); 
+      const user = await User.findByPk(userId);
 
       if (!user) {
         return res.status(404).json({ error: 'Usuário não encontrado' });

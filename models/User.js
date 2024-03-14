@@ -35,7 +35,6 @@ const User = database.sequelize.define("tb_users", {
     type: database.Sequelize.STRING,
     unique: true,
   }
-
 });
 
 User.sync();

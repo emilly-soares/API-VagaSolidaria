@@ -24,7 +24,7 @@ class CompanyController {
                 street,
                 numberStreet,
                 neighborhood,
-                candidateId:parseInt(candidateId), 
+                candidateId: candidateId || null , 
             });
 
             return res.status(201).json({ message: "Empresa criada com sucesso" });
