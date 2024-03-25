@@ -124,6 +124,30 @@ class UserController {
     }
   }
 
+  static async findUser(req, res) {
+    const userId = req.params.id;
+
+    try {
+      if (!userId) {
+        return res.status(400).json({ error: "É necessário fornecer um userId válido" });
+      }
+
+      const user = await User.findOne({
+        where: {
+          id: userId,
+        },
+      });
+
+      if (!user) {
+        return res.status(404).json({ error: "Usuário não encontrado" });
+      }
+
+      return res.status(200).json(user);
+    } catch (error) {
+      console.error("Erro ao buscar usuário:", error);
+      return res.status(500).json({ error: "Erro ao buscar usuário" });
+    }
+  }
 
   static async resetPassword(req, res) {
     const { email } = req.body;

@@ -11,7 +11,7 @@ routes.post("/userAuthentication", UserController.authenticate);
 routes.post("/user", UserController.createUser);
 routes.post('/resetPassword', UserController.resetPassword);
 routes.post('/updatePassword', UserController.updatePassword);
-routes.get('/userAdmin/:id', UserController);
+routes.get('/userAdmin/:id', UserController.isAdmin);
 
 routes.use(protect);
 
@@ -19,6 +19,7 @@ routes.post("/userAdmin", UserController.createUser);
 routes.get("/users", UserController.listUsers);
 routes.put("/user/:id", UserController.updateUser);
 routes.delete("/user/:id", UserController.deleteUser);
+routes.get("/user/:id", UserController.findUser);
 
 routes.post("/candidate", CandidateController.createCandidate);
 routes.get("/candidates", CandidateController.listCandidates);
