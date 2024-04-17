@@ -5,7 +5,6 @@ class CandidateController {
   static async createCandidate(req, res) {
     try {
       const {
-        name,
         dateBirth,
         CPF,
         phone,
@@ -16,7 +15,6 @@ class CandidateController {
       } = req.body;
 
       const candidate = await Candidate.create({
-        name,
         dateBirth,
         CPF,
         street,
@@ -84,38 +82,19 @@ class CandidateController {
   }
 
   static async findCandidate(req, res) {
-    const searchTerm = req.query.searchTerm;
-
+    const userId = req.params.userId;
     try {
-      let candidatesByName = [];
-      let candidatesByCPF = [];
-
-      if (searchTerm) {
-        candidatesByName = await Candidate.findAll({
-          where: {
-            name: { [Op.iLike]: `%${searchTerm}%` }, 
-          },
-        });
-
-        candidatesByCPF = await Candidate.findAll({
-          where: {
-            CPF: searchTerm, 
-          },
-        });
+      const candidate = await Candidate.findOne({ where: { userId } });
+      console.log(candidate);
+      if (!candidate) {
+        return res.status(404).json({ error: "Candidato não encontrado" });
       }
-
-      const result = {
-        candidatesByName,
-        candidatesByCPF,
-      };
-
-      return res.status(200).json(result);
+      return res.status(200).json(candidate);
     } catch (error) {
-      console.error("Erro ao buscar candidato:", error);
-      return res.status(500).json({ error: "Erro ao buscar candidato" });
+      console.error("Erro ao obter candidato pelo userId:", error);
+      res.status(500).json({ error: "Erro ao obter candidato pelo userId" });
     }
   }
-
 
 }
 

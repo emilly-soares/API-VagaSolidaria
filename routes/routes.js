@@ -25,7 +25,7 @@ routes.post("/candidate", CandidateController.createCandidate);
 routes.get("/candidates", CandidateController.listCandidates);
 routes.put("/candidate/:userId", CandidateController.updateCandidate);
 routes.delete("/candidate/:userId", CandidateController.deleteCandidate);
-routes.get("/candidate/:search", CandidateController.findCandidate);
+routes.get("/candidateFind/:userId", CandidateController.findCandidate);
 
 routes.post("/company", CompanyController.createCompany);
 routes.get("/companies", CompanyController.listCompanies);

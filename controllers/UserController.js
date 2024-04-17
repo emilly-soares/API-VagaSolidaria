@@ -50,7 +50,7 @@ class UserController {
 
   static async updateUser(req, res) {
     const id = req.params.id;
-    const { name, email } = req.body;
+    const { name, email, password } = req.body;
 
     try {
       let user = await User.findByPk(id);
@@ -61,6 +61,7 @@ class UserController {
 
       user.email = email;
       user.name = name;
+      user.password = password;
       user = await user.save();
 
       return res.status(200).json(user);
