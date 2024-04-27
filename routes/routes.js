@@ -6,6 +6,7 @@ const CompanyController = require("../controllers/CompanyController");
 const VacancyController = require("../controllers/VacancyController");
 const CandidateVacancyController = require("../controllers/CandidateVacancyController");
 const { protect } = require("../middleware/authenticate");
+const { isAdmin, isBusiness, isCandidate } = require("../middleware/authorize");
 
 routes.post("/userAuthentication", UserController.authenticate);
 routes.post("/user", UserController.createUser);
@@ -21,25 +22,25 @@ routes.put("/user/:id", UserController.updateUser);
 routes.delete("/user/:id", UserController.deleteUser);
 routes.get("/user/:id", UserController.findUser);
 
-routes.post("/candidate", CandidateController.createCandidate);
-routes.get("/candidates", CandidateController.listCandidates);
-routes.put("/candidate/:userId", CandidateController.updateCandidate);
-routes.delete("/candidate/:userId", CandidateController.deleteCandidate);
-routes.get("/candidateFind/:userId", CandidateController.findCandidate);
+routes.post("/candidate", isCandidate, CandidateController.createCandidate);
+routes.get("/candidates", isAdmin, CandidateController.listCandidates);
+routes.put("/candidate/:userId", isCandidate, CandidateController.updateCandidate);
+routes.delete("/candidate/:userId", isCandidate, CandidateController.deleteCandidate);
+routes.get("/candidateFind/:userId", isAdmin, CandidateController.findCandidate);
 
-routes.post("/company", CompanyController.createCompany);
-routes.get("/companies", CompanyController.listCompanies);
-routes.put("/company/:companyId", CompanyController.updateCompany);
-routes.delete("/company/:companyId", CompanyController.deleteCompany);
+routes.post("/company", isAdmin, CompanyController.createCompany);
+routes.get("/companies", isAdmin, CompanyController.listCompanies);
+routes.put("/company/:companyId", isAdmin, CompanyController.updateCompany);
+routes.delete("/company/:companyId", isAdmin, CompanyController.deleteCompany);
 
-routes.post("/vacancy", VacancyController.createVacancy);
-routes.get("/vacancies", VacancyController.listVacancies);
-routes.put("/vacancy/:vacancyId", VacancyController.updateVacancy);
-routes.delete("/vacancy/:vacancyId", VacancyController.deleteVacancy);
+routes.post("/vacancy", isBusiness, VacancyController.createVacancy);
+routes.get("/vacancies", isBusiness, VacancyController.listVacancies);
+routes.put("/vacancy/:vacancyId", isBusiness, VacancyController.updateVacancy);
+routes.delete("/vacancy/:vacancyId", isBusiness, VacancyController.deleteVacancy);
 
-routes.post("/candidateVacancy", CandidateVacancyController.createCandidateVacancy);
-routes.get("/candidatesVacancies", CandidateVacancyController.listCandidateVacancies);
-routes.put("/candidateVacancy/candidateVacancyId", CandidateVacancyController.updateCandidateVacancy);
-routes.delete("/candidateVacancy/candidateVacancyId", CandidateVacancyController.deleteCandidateVacancy);
+routes.post("/candidateVacancy", isBusiness, CandidateVacancyController.createCandidateVacancy);
+routes.get("/candidatesVacancies", isBusiness, CandidateVacancyController.listCandidateVacancies);
+routes.put("/candidateVacancy/candidateVacancyId", isBusiness, CandidateVacancyController.updateCandidateVacancy);
+routes.delete("/candidateVacancy/candidateVacancyId", isBusiness, CandidateVacancyController.deleteCandidateVacancy);
 
 module.exports = routes;

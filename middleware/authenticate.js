@@ -31,13 +31,6 @@ class AuthenticateUser {
     }
 
   }
-  static async isAdmin(req, res, next) {
-    const user = req.user;
-    if (!user || !user.isAdmin) {
-      return res.status(403).json({ error: "Acesso não autorizado" + user.isAdmin });
-    }
-    next();
-  }
 
 }
 

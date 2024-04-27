@@ -26,10 +26,11 @@ const User = database.sequelize.define("tb_users", {
     allowNull: false,
   },
 
-  isAdmin: {
-    type: database.Sequelize.BOOLEAN,
-    defaultValue: false,
-  },
+  role: {
+    type: Sequelize.ENUM('business', 'candidate', 'admin'),
+    allowNull: false,
+    defaultValue: 'candidate'
+  },  
 
   resetToken:{
     type: database.Sequelize.STRING,
