@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
@@ -17,7 +18,8 @@
   },
   "scripts": {
     "start": "nodemon server.js",
-    "test": "echo 'No tests configured'"
+    "test": "echo 'No tests configured'",
+    "seed": "node scripts/seed.js"
   },
   "name": "api-vagasolidaria",
   "version": "1.0.0",
