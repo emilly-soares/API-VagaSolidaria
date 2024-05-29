@@ -188,22 +188,19 @@ class UserController {
     }
   }
 
-  static async isAdmin(req, res) {
+  static async userRole(req, res) {
     try {
       const userId = req.params.id;
       const user = await User.findByPk(userId);
-
+  
       if (!user) {
         return res.status(404).json({ error: 'Usuário não encontrado' });
       }
 
-      if (user.isAdmin) {
-        return res.json({ isAdmin: true });
-      } else {
-        return res.json({ isAdmin: false });
-      }
+      return res.json({ role: user.role });
+  
     } catch (error) {
-      console.error('Erro ao verificar se o usuário é administrador:', error);
+      console.error('Erro ao verificar o papel do usuário:', error);
       return res.status(500).json({ error: 'Erro interno do servidor' });
     }
   }

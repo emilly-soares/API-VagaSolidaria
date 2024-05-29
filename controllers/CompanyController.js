@@ -12,7 +12,8 @@ class CompanyController {
                 street,
                 numberStreet,
                 neighborhood,
-                candidateId
+                candidateId,
+                logo 
             } = req.body;
 
             await Company.create({
@@ -24,7 +25,8 @@ class CompanyController {
                 street,
                 numberStreet,
                 neighborhood,
-                candidateId: candidateId || null , 
+                candidateId: candidateId || null,
+                logo 
             });
 
             return res.status(201).json({ message: "Empresa criada com sucesso" });
@@ -33,7 +35,6 @@ class CompanyController {
             res.status(500).json({ error: "Erro ao criar empresa" });
         }
     }
-
 
     static async listCompanies(req, res) {
         try {
@@ -44,7 +45,6 @@ class CompanyController {
             res.status(500).json({ error: "Erro ao listar empresas" });
         }
     }
-
 
     static async updateCompany(req, res) {
         const companyId = req.params.companyId;
@@ -66,7 +66,6 @@ class CompanyController {
         }
     }
 
-
     static async deleteCompany(req, res) {
         const companyId = req.params.companyId;
         try {
@@ -86,7 +85,6 @@ class CompanyController {
             res.status(500).json({ error: "Erro ao excluir empresa" });
         }
     }
-
 }
 
 module.exports = CompanyController;
