@@ -19,14 +19,14 @@ class UserController {
 
   static async createUser(req, res) {
     try {
-      const { name, email, password, isAdmin } = req.body;
+      const { name, email, password, role } = req.body;
       const passwordCipher = await bcrypt.hash(password, 10);
 
       const user = await User.create({
         name,
         email,
         password: passwordCipher,
-        isAdmin,
+        role, 
       });
 
       return res.status(201).json(user);

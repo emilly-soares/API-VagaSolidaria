@@ -30,7 +30,7 @@ const User = database.sequelize.define("tb_users", {
     type: Sequelize.ENUM('business', 'candidate', 'admin'),
     allowNull: false,
     defaultValue: 'candidate'
-  },  
+  }, 
 
   resetToken:{
     type: database.Sequelize.STRING,
