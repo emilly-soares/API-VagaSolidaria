@@ -1,4 +1,4 @@
-const Company = require("../models/Company");
+const Company = require('../models/Company'); 
 
 class CompanyController {
     static async createCompany(req, res) {
@@ -11,10 +11,12 @@ class CompanyController {
                 fantasyName,
                 street,
                 numberStreet,
-                neighborhood,
-                candidateId,
-                logo 
+                neighborhood
             } = req.body;
+            if (!req.file || !req.file.filename) {
+                return res.status(400).json({ error: "Logo da empresa não enviado" });
+            }
+            const logo = req.file.filename; 
 
             await Company.create({
                 cnpj,
@@ -25,8 +27,7 @@ class CompanyController {
                 street,
                 numberStreet,
                 neighborhood,
-                candidateId: candidateId || null,
-                logo 
+                logo
             });
 
             return res.status(201).json({ message: "Empresa criada com sucesso" });
@@ -35,7 +36,6 @@ class CompanyController {
             res.status(500).json({ error: "Erro ao criar empresa" });
         }
     }
-
     static async listCompanies(req, res) {
         try {
             const companies = await Company.findAll();
@@ -45,6 +45,7 @@ class CompanyController {
             res.status(500).json({ error: "Erro ao listar empresas" });
         }
     }
+
 
     static async updateCompany(req, res) {
         const companyId = req.params.companyId;
@@ -86,5 +87,4 @@ class CompanyController {
         }
     }
 }
-
 module.exports = CompanyController;
