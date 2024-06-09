@@ -51,6 +51,10 @@ const Company = database.sequelize.define("tb_companies", {
         type: database.Sequelize.STRING,
         allowNull: true,
     },
+    userId: { 
+        type: database.Sequelize.INTEGER,
+        allowNull: false,
+    },
 });
 
 Company.sync();
