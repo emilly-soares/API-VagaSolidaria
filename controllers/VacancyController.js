@@ -39,6 +39,16 @@ class VacancyController {
         }
     }
 
+    static async findByCompany(req, res) {
+        const companyId = req.params.companyId;
+        try {
+            const vacancies = await Vacancy.findAll({ where: { company_id: companyId } });
+            return res.status(200).json(vacancies);
+        } catch (error) {
+            console.error("Erro ao listar vagas por empresa:", error);
+            res.status(500).json({ error: "Erro ao listar vagas por empresa" });
+        }
+    }
 
     static async updateVacancy(req, res) {
         const vacancyId = req.params.vacancyId;

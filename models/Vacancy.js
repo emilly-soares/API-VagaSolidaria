@@ -28,6 +28,7 @@ const Vacancy = database.sequelize.define("tb_vacancies", {
         type: database.Sequelize.INTEGER,
         allowNull: false,
     },
+    
     candidateId: {
         type: database.Sequelize.INTEGER,
     },
