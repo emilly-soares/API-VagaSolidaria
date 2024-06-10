@@ -1,7 +1,8 @@
 const Company = require('../models/Company'); 
-
 class CompanyController {
+
     static async createCompany(req, res) {
+
         try {
             const {
                 cnpj,
@@ -36,6 +37,8 @@ class CompanyController {
             res.status(500).json({ error: "Erro ao criar empresa" });
         }
     }
+
+
     static async listCompanies(req, res) {
         try {
             const companies = await Company.findAll();
@@ -67,6 +70,7 @@ class CompanyController {
         }
     }
 
+
     static async deleteCompany(req, res) {
         const companyId = req.params.companyId;
         try {
@@ -86,6 +90,7 @@ class CompanyController {
             res.status(500).json({ error: "Erro ao excluir empresa" });
         }
     }
+    
     
     static async findCompanyByUserId(req, res) {
         const { userId } = req.params;

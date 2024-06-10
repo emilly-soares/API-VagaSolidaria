@@ -6,6 +6,7 @@ const UserController = require("../controllers/UserController");
 const CompanyController = require("../controllers/CompanyController");
 const VacancyController = require("../controllers/VacancyController");
 const CandidateVacancyController = require("../controllers/CandidateVacancyController");
+
 const { upload } = require('../middleware/upload');
 const { protect } = require("../middleware/authenticate");
 const { isAdmin, isBusiness, isCandidate } = require("../middleware/authorize");

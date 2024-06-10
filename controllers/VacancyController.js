@@ -1,7 +1,9 @@
 const Vacancy = require("../models/Vacancy");
 
 class VacancyController {
+
     static async createVacancy(req, res) {
+
         try {
             const {
                 status,
@@ -24,6 +26,7 @@ class VacancyController {
         }
     }
 
+
     static async listVacancies(req, res) {
         try {
             const vacancies = await Vacancy.findAll();
@@ -33,6 +36,7 @@ class VacancyController {
             res.status(500).json({ error: "Erro ao listar vagas" });
         }
     }
+
 
     static async updateVacancy(req, res) {
         const vacancyId = req.params.vacancyId;
@@ -54,6 +58,7 @@ class VacancyController {
         }
     }
 
+    
     static async deleteVacancy(req, res) {
         const vacancyId = req.params.vacancyId;
         try {

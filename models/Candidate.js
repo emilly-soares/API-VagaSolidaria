@@ -45,6 +45,7 @@ const Candidate = database.sequelize.define("tb_candidates", {
     type: database.Sequelize.INTEGER,
     allowNull: false,
   },
+  
 });
 
 Candidate.sync();

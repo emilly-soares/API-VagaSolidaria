@@ -2,7 +2,9 @@ const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
 
 class AuthenticateUser {
+
   static async protect(req, res, next) {
+
     try {
       const authorizationHeader = req.headers["authorization"];
       if (!authorizationHeader) {

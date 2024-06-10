@@ -2,7 +2,9 @@ const { Op } = require("sequelize");
 const Candidate = require("../models/Candidate");
 
 class CandidateController {
+
   static async createCandidate(req, res) {
+    
     try {
       const {
         dateBirth,
@@ -31,6 +33,7 @@ class CandidateController {
     }
   }
 
+
   static async listCandidates(req, res) {
     try {
       const candidates = await Candidate.findAll();
@@ -40,6 +43,7 @@ class CandidateController {
       return res.status(500).json({ error: "Erro ao listar candidatos" });
     }
   }
+
 
   static async updateCandidate(req, res) {
     const userId = req.params.userId;
@@ -61,8 +65,11 @@ class CandidateController {
     }
   }
 
+
   static async deleteCandidate(req, res) {
+
     const userId = req.params.userId;
+
     try {
       const deletedRows = await Candidate.destroy({
         where: {
@@ -80,6 +87,7 @@ class CandidateController {
       return res.status(500).json({ error: "Erro ao excluir candidato" });
     }
   }
+
 
   static async findCandidate(req, res) {
     const userId = req.params.userId;

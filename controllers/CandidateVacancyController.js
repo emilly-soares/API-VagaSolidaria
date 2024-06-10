@@ -1,7 +1,9 @@
 const CandidateVacancy = require("../models/CandidateVacancy");
 
 class CandidateVacancyController {
+
     static async createCandidateVacancy(req, res) {
+
         try {
             const {
                 conclusion,
@@ -20,11 +22,13 @@ class CandidateVacancyController {
             });
 
             return res.status(201).json({ message: "Candidato-Vaga criada com sucesso" });
+
         } catch (error) {
             console.error("Erro ao criar Candidato-Vaga:", error);
             res.status(500).json({ error: "Erro ao criar Candidato-Vaga" });
         }
     }
+
 
     static async listCandidateVacancies(req, res) {
         try {
@@ -35,6 +39,7 @@ class CandidateVacancyController {
             res.status(500).json({ error: "Erro ao listar Candidato-Vagas" });
         }
     }
+
 
     static async updateCandidateVacancy(req, res) {
         const candidateVacancyId = req.params.candidateVacancyId;
@@ -55,6 +60,7 @@ class CandidateVacancyController {
             res.status(500).json({ error: "Erro ao atualizar Candidato-Vaga" });
         }
     }
+
 
     static async deleteCandidateVacancy(req, res) {
         const candidateVacancyId = req.params.candidateVacancyId;

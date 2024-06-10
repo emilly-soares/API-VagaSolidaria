@@ -36,6 +36,7 @@ class UserController {
     }
   }
 
+
   static async listUsers(req, res) {
     try {
       const users = await User.findAll({
@@ -47,6 +48,7 @@ class UserController {
       return res.status(500).json({ error: "Erro ao listar usuários" });
     }
   }
+
 
   static async updateUser(req, res) {
     const id = req.params.id;
@@ -70,6 +72,7 @@ class UserController {
       return res.status(500).json({ error: "Erro ao atualizar usuário" });
     }
   }
+
 
   static async deleteUser(req, res) {
     const id = req.params.id;
@@ -125,6 +128,7 @@ class UserController {
     }
   }
 
+
   static async findUser(req, res) {
     const userId = req.params.id;
 
@@ -149,6 +153,7 @@ class UserController {
       return res.status(500).json({ error: "Erro ao buscar usuário" });
     }
   }
+
 
   static async resetPassword(req, res) {
     const { email } = req.body;
@@ -188,6 +193,7 @@ class UserController {
     }
   }
 
+
   static async userRole(req, res) {
     try {
       const userId = req.params.id;
@@ -204,6 +210,7 @@ class UserController {
       return res.status(500).json({ error: 'Erro interno do servidor' });
     }
   }
+
 
   static async updatePassword(req, res) {
     const { email, token, newPassword } = req.body;
@@ -244,7 +251,6 @@ class UserController {
       return res.status(500).json({ error: 'Erro ao processar recuperação de senha' });
     }
   }
-
 
 }
 
