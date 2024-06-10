@@ -7,16 +7,14 @@ class VacancyController {
                 status,
                 description,
                 jobTitle,
-                company_id,
-                candidateId
+                company_id
             } = req.body;
 
             await Vacancy.create({
                 status,
                 description,
                 jobTitle,
-                company_id: parseInt(company_id),
-                candidateId: parseInt(candidateId)
+                company_id: parseInt(company_id)
             });
 
             return res.status(201).json({ message: "Vaga criada com sucesso" });

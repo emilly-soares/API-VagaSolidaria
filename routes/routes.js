@@ -35,11 +35,12 @@ routes.get("/candidateFind/:userId", CandidateController.findCandidate);
 routes.post('/company', upload.single('logo'), CompanyController.createCompany);
 routes.put("/company/:companyId", upload.single('logo'), CompanyController.updateCompany);
 routes.delete("/company/:companyId", CompanyController.deleteCompany);
+routes.get('/company/:userId', CompanyController.findCompanyByUserId);
 
-routes.post("/vacancy", isBusiness, VacancyController.createVacancy);
-routes.get("/vacancies", isBusiness, VacancyController.listVacancies);
-routes.put("/vacancy/:vacancyId", isBusiness, VacancyController.updateVacancy);
-routes.delete("/vacancy/:vacancyId", isBusiness, VacancyController.deleteVacancy);
+routes.post("/vacancy", VacancyController.createVacancy);
+routes.get("/vacancies", VacancyController.listVacancies);
+routes.put("/vacancy/:vacancyId", VacancyController.updateVacancy);
+routes.delete("/vacancy/:vacancyId", VacancyController.deleteVacancy);
 
 routes.post("/candidateVacancy", isBusiness, CandidateVacancyController.createCandidateVacancy);
 routes.get("/candidatesVacancies", isBusiness, CandidateVacancyController.listCandidateVacancies);

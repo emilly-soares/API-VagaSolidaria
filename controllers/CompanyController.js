@@ -86,5 +86,30 @@ class CompanyController {
             res.status(500).json({ error: "Erro ao excluir empresa" });
         }
     }
+    
+    static async findCompanyByUserId(req, res) {
+        const { userId } = req.params;
+    
+        try {
+            const company = await Company.findOne({
+                where: {
+                    userId: userId,
+                },
+            });
+    
+            if (!company) {
+                return res.status(404).json({ error: "Empresa não encontrada" });
+            }
+    
+            return res.status(200).json(company);
+        } catch (error) {
+            console.error("Erro ao buscar empresa pelo userId:", error);
+            res.status(500).json({ error: "Erro ao buscar empresa pelo userId" });
+        }
+    }
+    
 }
+
+
+
 module.exports = CompanyController;
