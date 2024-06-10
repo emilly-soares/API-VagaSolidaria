@@ -21,6 +21,7 @@ routes.get('/userRole/:id', UserController.userRole);
 routes.get("/companies", CompanyController.listCompanies);
 
 routes.use(protect);
+
 routes.post("/user", UserController.createUser);
 routes.get("/users", UserController.listUsers);
 routes.put("/user/:id", UserController.updateUser);
