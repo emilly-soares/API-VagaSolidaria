@@ -38,6 +38,16 @@ const Vacancy = database.sequelize.define("tb_vacancies", {
         allowNull: true,
     },
 
+    responsibilities: {
+        type: database.Sequelize.STRING,
+        allowNull: true,
+    },
+
+    benefits: {
+        type: database.Sequelize.STRING,
+        allowNull: true,
+    },
+
 });
 
 Vacancy.sync();

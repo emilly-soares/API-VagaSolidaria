@@ -10,7 +10,8 @@ class VacancyController {
                 description,
                 jobTitle,
                 company_id,
-                workload
+                workload,
+                responsibilities
             } = req.body;
 
             await Vacancy.create({
@@ -18,7 +19,8 @@ class VacancyController {
                 description,
                 jobTitle,
                 company_id: parseInt(company_id),
-                workload
+                workload,
+                responsibilities
             });
 
             return res.status(201).json({ message: "Vaga criada com sucesso" });
