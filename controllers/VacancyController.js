@@ -52,6 +52,20 @@ class VacancyController {
         }
     }
 
+    static async findById(req, res) {
+        const vacancyId = req.params.vacancyId;
+        try {
+            const vacancy = await Vacancy.findByPk(vacancyId);
+            if (!vacancy) {
+                return res.status(404).json({ error: "Vaga não encontrada" });
+            }
+            return res.status(200).json(vacancy);
+        } catch (error) {
+            console.error("Erro ao buscar vaga:", error);
+            res.status(500).json({ error: "Erro ao buscar vaga" });
+        }
+    }
+
     static async updateVacancy(req, res) {
         const vacancyId = req.params.vacancyId;
         const updatedVacancyData = req.body;
@@ -72,7 +86,7 @@ class VacancyController {
         }
     }
 
-    
+
     static async deleteVacancy(req, res) {
         const vacancyId = req.params.vacancyId;
         try {

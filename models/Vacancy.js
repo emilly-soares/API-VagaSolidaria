@@ -41,12 +41,7 @@ const Vacancy = database.sequelize.define("tb_vacancies", {
     responsibilities: {
         type: database.Sequelize.STRING,
         allowNull: true,
-    },
-
-    benefits: {
-        type: database.Sequelize.STRING,
-        allowNull: true,
-    },
+    }
 
 });
 

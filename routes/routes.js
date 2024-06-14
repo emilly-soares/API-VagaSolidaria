@@ -44,6 +44,7 @@ routes.get("/vacancies", VacancyController.listVacancies);
 routes.get('/vacancies/company/:companyId', VacancyController.findByCompany);
 routes.put("/vacancy/:vacancyId", VacancyController.updateVacancy);
 routes.delete("/vacancy/:vacancyId", VacancyController.deleteVacancy);
+routes.get('/vacancy/:vacancyId', VacancyController.findById);
 
 routes.post("/candidateVacancy", isBusiness, CandidateVacancyController.createCandidateVacancy);
 routes.get("/candidatesVacancies", isBusiness, CandidateVacancyController.listCandidateVacancies);
