@@ -92,6 +92,21 @@ class CompanyController {
     }
     
     
+    static async findById(req, res) {
+        const companyId = req.params.companyId;
+        try {
+            const company = await Company.findByPk(companyId);
+            if (!company) {
+                return res.status(404).json({ error: "Empresa não encontrada" });
+            }
+            return res.status(200).json(company);
+        } catch (error) {
+            console.error("Erro ao buscar empresa:", error);
+            res.status(500).json({ error: "Erro ao buscar empresa" });
+        }
+    }
+    
+
     static async findCompanyByUserId(req, res) {
         const { userId } = req.params;
     
