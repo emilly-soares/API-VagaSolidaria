@@ -1,24 +1,31 @@
 const CandidateVacancy = require("../models/CandidateVacancy");
+const Candidate = require("../models/Candidate");
+const User = require("../models/User");
 
 class CandidateVacancyController {
 
     static async createCandidateVacancy(req, res) {
-
         try {
             const {
                 conclusion,
                 evaluation,
-                grade,
                 vacancyId,
-                candidateId
+                candidateId,
+                availability
             } = req.body;
 
+            const parsedVacancyId = parseInt(vacancyId);
+            const parsedCandidateId = parseInt(candidateId);
+
+            if (isNaN(parsedVacancyId) || isNaN(parsedCandidateId)) {
+                return res.status(400).json({ error: "Dados inválidos fornecidos." });
+            }
             await CandidateVacancy.create({
                 conclusion,
                 evaluation,
-                grade: parseInt(grade),
                 vacancyId: parseInt(vacancyId),
-                candidateId: parseInt(candidateId)
+                candidateId: parseInt(candidateId),
+                availability
             });
 
             return res.status(201).json({ message: "Candidato-Vaga criada com sucesso" });
@@ -29,7 +36,6 @@ class CandidateVacancyController {
         }
     }
 
-
     static async listCandidateVacancies(req, res) {
         try {
             const candidateVacancies = await CandidateVacancy.findAll();
@@ -39,7 +45,6 @@ class CandidateVacancyController {
             res.status(500).json({ error: "Erro ao listar Candidato-Vagas" });
         }
     }
-
 
     static async updateCandidateVacancy(req, res) {
         const candidateVacancyId = req.params.candidateVacancyId;
@@ -61,7 +66,6 @@ class CandidateVacancyController {
         }
     }
 
-
     static async deleteCandidateVacancy(req, res) {
         const candidateVacancyId = req.params.candidateVacancyId;
         try {
@@ -81,6 +85,29 @@ class CandidateVacancyController {
             res.status(500).json({ error: "Erro ao excluir Candidato-Vaga" });
         }
     }
+
+    static async findCandidatesVacancy(req, res) {
+        try {
+            const vacancyId = req.params.vacancyId;
+            const candidates = await CandidateVacancy.findAll({
+                where: { vacancyId },
+            });
+            res.json(candidates);
+        } catch (error) {
+            console.error('Erro ao obter candidatos:', error);
+            res.status(500).json({ error: 'Erro ao obter candidatos' });
+        }
+    }
+
+    static async apply(req, res) {
+        try {
+            const { vacancyId, candidateId, availability } = req.body;
+            res.json({ message: 'Candidatura enviada com sucesso!' });
+        } catch (error) {
+            console.error('Erro ao processar candidatura:', error);
+            res.status(500).json({ error: 'Erro ao processar candidatura' });
+        }
+    };
 }
 
 module.exports = CandidateVacancyController;

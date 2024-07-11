@@ -36,26 +36,30 @@ routes.get("/vacancies", VacancyController.listVacancies);
 routes.get('/vacancies/company/:companyId', VacancyController.findByCompany);
 
 routes.get('/vacancy/:vacancyId', VacancyController.findById);
+routes.get('/vacancies/company/vacancies', VacancyController.findByCompanyVacancies);
 
-routes.post("/candidateVacancy", isBusiness, CandidateVacancyController.createCandidateVacancy);
-routes.get("/candidatesVacancies", isBusiness, CandidateVacancyController.listCandidateVacancies);
+routes.post("/candidateVacancy", CandidateVacancyController.createCandidateVacancy);
+routes.post("/apply", CandidateVacancyController.createCandidateVacancy);
+routes.get("/candidatesVacancies", CandidateVacancyController.listCandidateVacancies);
 routes.put("/candidateVacancy/candidateVacancyId", isBusiness, CandidateVacancyController.updateCandidateVacancy);
 routes.delete("/candidateVacancy/candidateVacancyId", isBusiness, CandidateVacancyController.deleteCandidateVacancy);
-
-
-routes.use(protect);
+//routes.get('/candidates/vacancy/:userId', CandidateVacancyController.listCandidatesByVacancy);
+routes.get( '/candidates/vacancy/:vacancyId', CandidateVacancyController.findCandidatesVacancy);
 
 routes.put("/user/:id", UserController.updateUser);
 routes.delete("/user/:id", UserController.deleteUser);   
 
 routes.post("/vacancy", VacancyController.createVacancy);
 
-routes.get("/candidates", isAdmin, CandidateController.listCandidates);
+routes.get("/candidates", CandidateController.listCandidates);
 routes.put("/candidate/:userId", isCandidate, CandidateController.updateCandidate);
 routes.delete("/candidate/:userId", isCandidate, CandidateController.deleteCandidate);
 routes.get("/candidateFind/:userId", CandidateController.findCandidate);
 
 routes.put("/vacancy/:vacancyId", VacancyController.updateVacancy);
 routes.delete("/vacancy/:vacancyId", VacancyController.deleteVacancy);
+
+routes.use(protect);
+
 
 module.exports = routes;

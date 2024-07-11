@@ -1,6 +1,6 @@
 const database = require("../config/connection");
 
-const CandidateVacancy = database.sequelize.define("tb_candidate_vacancy", {
+const CandidateVacancy = database.sequelize.define("tb_candidate_vacancies", {
 
     id: {
         type: database.Sequelize.INTEGER,
@@ -15,12 +15,7 @@ const CandidateVacancy = database.sequelize.define("tb_candidate_vacancy", {
 
     evaluation: {
         type: database.Sequelize.STRING,
-        allowNull: false,
-    },
-
-    grade: {
-        type: database.Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
     },
 
     vacancyId: {
@@ -32,6 +27,11 @@ const CandidateVacancy = database.sequelize.define("tb_candidate_vacancy", {
         type: database.Sequelize.INTEGER,
         allowNull: false,
     },
+
+    availability:{
+        type: database.Sequelize.STRING,
+        allowNull: false,
+    }
 
 });
 
