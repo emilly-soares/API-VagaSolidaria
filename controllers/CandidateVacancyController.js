@@ -99,15 +99,6 @@ class CandidateVacancyController {
         }
     }
 
-    static async apply(req, res) {
-        try {
-            const { vacancyId, candidateId, availability } = req.body;
-            res.json({ message: 'Candidatura enviada com sucesso!' });
-        } catch (error) {
-            console.error('Erro ao processar candidatura:', error);
-            res.status(500).json({ error: 'Erro ao processar candidatura' });
-        }
-    };
 }
 
 module.exports = CandidateVacancyController;

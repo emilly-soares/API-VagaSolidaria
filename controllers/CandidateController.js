@@ -1,6 +1,6 @@
 const { Op } = require("sequelize");
 const Candidate = require("../models/Candidate");
-
+const User = require("../models/User");
 class CandidateController {
 
   static async createCandidate(req, res) {
@@ -88,7 +88,6 @@ class CandidateController {
     }
   }
 
-
   static async findCandidate(req, res) {
     const userId = req.params.userId;
     try {
@@ -104,6 +103,29 @@ class CandidateController {
     }
   }
 
+  static async findUserCandidate(req, res) {
+    const { candidateId } = req.params;
+
+    try {
+       
+        const candidate = await Candidate.findByPk(candidateId);
+
+        if (!candidate) {
+            return res.status(404).json({ message: 'Candidato não encontrado.' });
+        }
+
+        const user = await User.findByPk(candidate.userId);
+
+        if (!user) {
+            return res.status(404).json({ message: 'Usuário não encontrado.' });
+        }
+
+        res.json(user);
+    } catch (error) {
+        console.error('Erro ao buscar usuário:', error);
+        res.status(500).json({ message: 'Erro interno do servidor.' });
+    }
+};
 }
 
 module.exports = CandidateController;
