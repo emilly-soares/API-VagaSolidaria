@@ -84,6 +84,25 @@ anymatch@~3.1.2:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
 
+"api-vagasolidaria@file:":
+  version "1.0.0"
+  resolved "file:"
+  dependencies:
+    api-vagasolidaria "file:"
+    bcrypt "^5.1.1"
+    bcryptjs "^2.4.3"
+    cors "^2.8.5"
+    crypto "^1.0.1"
+    dotenv "^16.3.1"
+    express "^4.18.2"
+    jsonwebtoken "^9.0.2"
+    multer "^1.4.5-lts.1"
+    nodemailer "^6.9.10"
+    nodemon "^3.0.1"
+    pg "^8.11.3"
+    pg-hstore "^2.3.4"
+    sequelize "^6.33.0"
+
 append-field@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/append-field/-/append-field-1.0.0.tgz"
@@ -590,6 +609,11 @@ fs.realpath@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz"
   integrity sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==
+
+fsevents@~2.3.2:
+  version "2.3.3"
+  resolved "https://registry.npmjs.org/fsevents/-/fsevents-2.3.3.tgz"
+  integrity sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==
 
 function-bind@^1.1.1:
   version "1.1.1"
